@@ -2,6 +2,7 @@ import json
 import os
 import urllib.request
 import urllib.error
+import datetime
 
 def fetch_token():
     token_url = "https://cookies.yecic62314.workers.dev/"
@@ -72,7 +73,23 @@ def generate_m3u(json_path, output_path):
 
     print(f"Found {len(channels)} channels.")
 
-    m3u_content = ["#EXTM3U"]
+    # Calculate BD Time (UTC + 6)
+    utc_now = datetime.datetime.utcnow()
+    bd_time = utc_now + datetime.timedelta(hours=6)
+    formatted_time = bd_time.strftime("%Y-%m-%d %I:%M %p")
+
+    m3u_header = f"""#EXTM3U
+#=================================
+# Developed By: OMNIX EMPIER
+# IPTV Telegram Channels: https://t.me/omnix_Empire
+# Last Updated: {formatted_time} (BD Time)
+# Disclaimer:
+# This tool does NOT host any content.
+# It aggregates publicly available data for informational purposes only.
+# For any issues or concerns, please contact the developer.
+#=================================="""
+
+    m3u_content = [m3u_header]
 
     # Official Headers identified
     user_agent = "plaYtv/7.1.5 (Linux;Android 13) ExoPlayerLib/2.11.6"
@@ -129,7 +146,7 @@ def generate_m3u(json_path, output_path):
 
 if __name__ == "__main__":
     json_file = "all_channels.json"
-    m3u_file = "Omnix_play.m3u"
+    m3u_file = "omnix_play.m3u"
     
     pwd = os.getcwd()
     json_full_path = os.path.join(pwd, json_file)
