@@ -22,6 +22,6 @@ jobs:
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
-        git add Omnix_play.m3u
+        git add omnix_play.m3u
         git commit -m "Auto-update playlist [skip ci]" || echo "No changes to commit"
         git push
